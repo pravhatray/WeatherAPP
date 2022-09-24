@@ -1,0 +1,108 @@
+body{
+    /* background-position:0; */
+    background-image: url(https://cdn.wallpapersafari.com/86/77/FJZ1zH.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    /* background-color: black; */
+}
+
+#week{
+    height:200px;
+    width: 700px;
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+   scroll-behavior: auto;
+  
+   position: absolute;
+   bottom: 1px;
+
+}
+
+#week::-webkit-scrollbar{
+    width: 0;
+     height: 0;
+}
+
+.days{
+    height:180px;
+    width: 400px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: rgb(30, 25, 25);
+    border-radius: 10px;
+    border: 0.5px solid rgb(190, 186, 186);
+    background-color: rgba(73, 168, 236, 0.263);
+    box-shadow: rgba(255, 252, 252, 0.35) 0px 5px 15px;
+   
+ }
+
+ .date{
+    font-weight:600;
+    color: rgb(245, 255, 64);
+}
+.desc{
+    margin-top: 60px;
+}
+.date,.temp,.max,.min,.desc{
+    margin:0;
+}
+
+.laathi{
+    width:200px;
+    /* border:1px solid black */
+}
+
+#joindiv{
+/* border: 1px solid rgb(78, 78, 5); */
+width:100%;
+height:auto;
+    position: relative;
+}
+
+.gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    height: 550px;
+    width: 540px;
+}
+
+#mainbox{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    /* border:1px solid black; */
+    height:400px;
+}
+#navbar{
+    height: auto;
+    width: 100%;
+   
+    
+}
+input{
+    font-size: xx-large;
+    color:aqua;
+    border-radius: 5px;
+    background-color: rgb(59, 57, 57);
+    width:600px;
+}
+button{
+    font-size: xx-large;
+    color: rgb(42, 40, 40);
+    border-radius: 5px;
+    background-color: rgb(108, 239, 52);
+    cursor: pointer;
+}
+h1{
+    color: blueviolet;
+}
+
+#container{
+    color: rgb(229, 133, 14);
+}

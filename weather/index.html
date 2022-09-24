@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="week.css">
+    <style>
+      
+    </style>
+</head>
+
+<body>
+    <h1>MAUSAM.COM</h1>
+    <div id="navbar">
+        <input type="text" id="city" placeholder="search for city..." />
+        <button id="btn" onclick="getData()">Forecast-Weather</button>
+        <button onclick="mylocation()">My Location</button>
+    </div>
+
+<div id="joindiv">
+    <div id="mainbox">
+    <div id="container">
+   
+       
+    </div>
+    <div class="mapouter">
+        <div class="gmap_canvas">
+            <iframe width="540" height="550" id="gmap_canvas"
+                frameborder="0"
+                scrolling="no" marginheight="0" marginwidth="0">
+            </iframe>
+            <!-- <a href="https://www.embedgooglemap.net">insert google map into website</a> -->
+        </div>
+    </div>
+</div>
+<div id="week">
+</div>
+</div>
+</body>
+
+</html>
+
+
+<!-- //link="https://api.weatherbit.io/v2.0/forecast/daily?city=Raleigh,NC&key=API_KEY" -->
+<script>
+
+    let apikey = "4ce2a55b5b98d8efdedd2fc33674956e"
+    async function getData() {
+
+        let desh = document.querySelector("#city").value;
+
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${desh}&appid=${apikey}`
+       let url7=`https://api.weatherbit.io/v2.0/forecast/daily?city=${desh}&key=9db592c7b0624a9792a84487ab88a76b`
+
+        // console.log(url)
+
+        let res = await fetch(url);
+        let data = await res.json();
+        append(data)
+        // console.log(data)
+
+
+        let res7 = await fetch(url7);
+        let data7 = await res7.json();
+        append7(data7.data);
+        // console.log(data7)
+    }
+
+    function append7(data7){
+        // console.log(data7)
+        document.querySelector("#week").innerHTML = null;
+        data7.forEach(function(element){
+
+            let div=document.createElement("div");
+            div.setAttribute("class", "days");
+
+            let date=document.createElement("p");
+            date.innerText="Date:-"+element.datetime;
+            date.setAttribute("class","date");
+
+            let temp=document.createElement("p");
+            temp.innerText="Temperature:-"+element.temp;
+            temp.setAttribute("class","temp")
+
+            let max_temp=document.createElement("p");
+            max_temp.innerText="Max-Temp:-"+element.max_temp;
+            max_temp.setAttribute("class","max")
+
+            let min_temp=document.createElement("p");
+            min_temp.innerText="Min-Temp:-"+element.min_temp;
+            min_temp.setAttribute("class","min")
+
+            let desc=document.createElement("p");
+            desc.innerText="Description:-"+element.weather.description;
+            desc.setAttribute("class","desc")
+
+            let laathi=document.createElement("div")
+            laathi.setAttribute("class" , "laathi")
+
+            div.append(date,temp,max_temp,min_temp,desc,laathi)
+            document.querySelector("#week").append(div)
+
+            // console.log(div)
+
+
+        })
+
+
+    }
+
+    function append(data) {
+
+        let container = document.querySelector("#container");
+        container.innerHTML = null;
+
+        let h2 = document.createElement("h2")
+        h2.innerText = "Current City:-" + data.name;
+
+        let p = document.createElement("p");
+        p.innerText = "Current-Temperature:-" + data.main.temp;
+
+        let p1 = document.createElement("p");
+        p1.innerText = "Max-Temperature:-" + data.main.temp_max;
+
+        let p2 = document.createElement("p");
+        p2.innerText = "Max-Temperature:-" + data.main.temp_min;
+
+
+
+        container.append(h2, p, p1, p2)
+
+        let iframe=document.getElementById("gmap_canvas");
+        iframe.src=`https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+
+    }
+
+
+    function mylocation(){
+
+    function getLocationWeather() {
+  navigator.geolocation.getCurrentPosition(success);
+
+  function success(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    live(latitude, longitude);
+    // console.log(latitude);
+    // console.log(longitude);
+  }
+ async function live(lat,lon){
+
+    let city=document.querySelector("#city").value;
+
+    let link=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}`
+
+    let d=await fetch(link);
+    let c=await d.json();
+    // console.log(c);
+    append(c)
+
+    let link1=`https://api.weatherbit.io/v2.0/forecast/daily?&lat=${lat}&lon=${lon}&key=9db592c7b0624a9792a84487ab88a76b`
+    let d1=await fetch(link1);
+    let c1=await d1.json();
+    console.log(c1.data);
+    append7(c1.data)
+  }
+}
+
+
+
+getLocationWeather()
+
+    }
+
+//     function getLocationWeather() {
+//   navigator.geolocation.getCurrentPosition(success);
+
+//   function success(position) {
+//     const latitude = position.coords.latitude;
+//     const longitude = position.coords.longitude;
+
+//     getData(latitude, longitude);
+
+//     console.log(latitude);
+//     console.log(longitude);
+//   }
+// }
+// getLocationWeather()
+</script>
